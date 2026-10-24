@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>隱ｬ譏手ｳ・侭_PAI譛邨りｪｲ鬘・/title>
+<title>説明資料_PAI最終課題</title>
 <style>
   @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
   body { font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif; font-size: 10.5pt; line-height: 1.6; color: #1a1a1a; }
@@ -32,147 +32,170 @@
 </head>
 <body>
 
-<h1>隕冶ｦ哂I縺ｫ繧医ｋ雉・ｺ舌ざ繝溯・蜍穂ｻ募・縺代Ο繝懊ャ繝・/h1>
-<div class="sub">Physical AI 蠢懃畑1隰帛ｺｧ 譛邨りｪｲ鬘・隱ｬ譏手ｳ・侭 ・・MuJoCo + Franka Panda + 閾ｪ菴・CNN・・GB-D・峨↓繧医ｋ髢峨Ν繝ｼ繝嶺ｻ募・縺代す繧ｹ繝・Β</div>
+<h1>視覚AIによる資源ゴミ自動仕分けロボット</h1>
+<div class="sub">Physical AI 応用1講座 最終課題 説明資料 ／ MuJoCo + Franka Panda + 自作 CNN（RGB-D）による閉ループ仕分けシステム</div>
 
 <div class="box">
-<b>謠仙・迚ｩ縺ｮ蟇ｾ蠢・/b>・壼虚逕ｻ・・ouTube, 遲牙埼溘・邏・蛻・3遘抵ｼ会ｼ・繧ｳ繝ｼ繝我ｸ蠑擾ｼ・itHub, public・会ｼ・譛ｬ隱ｬ譏手ｳ・侭・・DF・峨・<b>AI 縺ｮ蛻ｩ逕ｨ</b>・壻ｿｯ迸ｰ RGB-D 逕ｻ蜒上°繧臥ｴ譚舌ｒ蛻､螳壹☆繧・CNN 繧定・菴懊＠縲・b>蟄ｦ鄙抵ｼ・yTorch・峨→謗ｨ隲悶・荳｡譁ｹ</b>繧偵す繝溘Η繝ｬ繝ｼ繧ｿ蜀・・蜷域・繝・・繧ｿ縺ｧ陦後▲縺溘・</div>
+<b>提出物の対応</b>：動画（YouTube, 等倍速・約1分33秒）／ コード一式（GitHub, public）／ 本説明資料（PDF）。
+<b>AI の利用</b>：俯瞰 RGB-D 画像から素材を判定する CNN を自作し、<b>学習（PyTorch）と推論の両方</b>をシミュレータ内の合成データで行った。
+</div>
 
-<h2>1. 隱ｲ鬘後・讎りｦ√→逶ｮ逧・/h2>
-<p>雉・ｺ舌ざ繝滂ｼ・ET 繝懊ヨ繝ｫ繝ｻ繧｢繝ｫ繝溽ｼｶ繝ｻ邏吶ヱ繝・け繝ｻ繧ｬ繝ｩ繧ｹ逑ｶ・峨′繝吶Ν繝井ｸ翫↓繝ｩ繝ｳ繝繝縺ｫ鄂ｮ縺九ｌ縺溽憾豕√ｒ MuJoCo 縺ｧ蜀咲樟縺励・繝ｭ繝懊ャ繝医い繝ｼ繝・・ranka Emika Panda・峨′<b>閾ｪ蛻・・繧ｫ繝｡繝ｩ縺ｧ迚ｩ菴薙ｒ隕九▽縺代、I縺ｧ邏譚舌ｒ蛻､螳壹＠縲∫ｴ譚舌＃縺ｨ縺ｮ繝薙Φ縺ｸ莉募・縺代ｋ</b>繧ｿ繧ｹ繧ｯ繧貞ｮ溯｣・＠縺溘・邏譚舌・繝ｩ繝吶Ν繧・ｽ咲ｽｮ縺ｯ荳蛻・Ο繝懊ャ繝医↓荳弱∴縺壹・b>隕ｳ貂ｬ 竊・隱崎ｭ・竊・陦悟虚 竊・蜀崎ｦｳ貂ｬ</b>縺ｮ髢峨Ν繝ｼ繝励〒蜈ｨ迚ｩ菴薙ｒ蜃ｦ逅・☆繧狗せ縺梧悽隱ｲ鬘後・縺ｭ繧峨＞縺ｧ縺ゅｋ縲・/p>
-<p>蜉縺医※縲∫樟螳溘・驕ｸ蛻･迴ｾ蝣ｴ縺ｧ蠢・★豺ｷ蜈･縺吶ｋ縲悟ｭｦ鄙偵＠縺ｦ縺・↑縺・黄菴薙阪↓蟇ｾ縺励・b>辟｡逅・↓蛻・｡槭○縺壹梧焔驕ｸ蛻･縲阪ン繝ｳ縺ｸ騾驕ｿ縺輔○繧・/b>譛ｪ遏･迚ｩ菴捺､懷・
-・・ut-of-Distribution 讀懷・・峨ｒ邨・∩霎ｼ縺ｿ縲、I 縺ｮ蛻､譁ｭ繧貞ｮ牙・蛛ｴ縺ｫ蛟偵☆險ｭ險医→縺励◆縲・/p>
+<h2>1. 課題の概要と目的</h2>
+<p>資源ゴミ（PET ボトル・アルミ缶・紙パック・ガラス瓶）がベルト上にランダムに置かれた状況を MuJoCo で再現し、
+ロボットアーム（Franka Emika Panda）が<b>自分のカメラで物体を見つけ、AIで素材を判定し、素材ごとのビンへ仕分ける</b>タスクを実装した。
+素材のラベルや位置は一切ロボットに与えず、<b>観測 → 認識 → 行動 → 再観測</b>の閉ループで全物体を処理する点が本課題のねらいである。</p>
+<p>加えて、現実の選別現場で必ず混入する「学習していない物体」に対し、<b>無理に分類せず「手選別」ビンへ退避させる</b>未知物体検出
+（Out-of-Distribution 検出）を組み込み、AI の判断を安全側に倒す設計とした。</p>
 
-<h3>縺ｪ縺懊％縺ｮ繝・・繝槭°・亥ｮ溽畑諤ｧ縺ｮ閭梧勹・・/h3>
+<h3>なぜこのテーマか（実用性の背景）</h3>
 <ul>
-  <li>蟒・｣・黄驕ｸ蛻･縺ｯ AI 繝ｭ繝懊ャ繝亥喧縺悟ｮ滄圀縺ｫ騾ｲ繧鬆伜沺縺ｧ縺ゅｋ縲らｱｳ AMP Robotics 縺ｮ AMP Cortex 縺ｯ AI 逕ｻ蜒剰ｪ崎ｭ倥〒繝ｪ繧ｵ繧､繧ｯ繝ｫ蜩√ｒ隴伜挨縺励・      1 蛻・≠縺溘ｊ譛螟ｧ 80縲・60 繝斐ャ繧ｯ・井ｺｺ縺ｮ邏・2 蛟搾ｼ峨〒驕ｸ蛻･縺吶ｋ [1][2]縲・/li>
-  <li>蝗ｽ蜀・〒繧ゅ∫肇蟒・・逅・･ｭ縺ｮ繧ｷ繧ｿ繝ｩ闊育肇・亥涵邇臥恁豺ｱ隹ｷ蟶ゑｼ峨′ 2017 蟷ｴ縺九ｉ AI 驕ｸ蛻･繝ｭ繝懊ャ繝医ｒ譛ｬ譬ｼ遞ｼ蜒阪＆縺帙・      驕ｸ蛻･菴懈･ｭ蜩｡繧・18 蜷阪°繧・2 蜷阪↓貂帙ｉ縺励∵ｮ九▲縺滉ｽ懈･ｭ蜩｡縺ｯ<b>繝ｭ繝懊ャ繝医′蜿悶ｊ谿九＠縺溽黄縺ｮ遒ｺ隱・/b>縺ｫ蟆ょｿｵ縺励※縺・ｋ [3]縲・      竊・譛ｬ隱ｲ鬘後・縲梧悴遏･迚ｩ菴薙・謇矩∈蛻･縺ｸ蝗槭☆縲崎ｨｭ險医・縲√％縺ｮ螳滄°逕ｨ縺ｮ蠖ｹ蜑ｲ蛻・球繧偵◎縺ｮ縺ｾ縺ｾ蜀吶＠縺溘ｂ縺ｮ縺ｧ縺ゅｋ縲・/li>
+  <li>廃棄物選別は AI ロボット化が実際に進む領域である。米 AMP Robotics の AMP Cortex は AI 画像認識でリサイクル品を識別し、
+      1 分あたり最大 80〜160 ピック（人の約 2 倍）で選別する [1][2]。</li>
+  <li>国内でも、産廃処理業のシタラ興産（埼玉県深谷市）が 2017 年から AI 選別ロボットを本格稼働させ、
+      選別作業員を 18 名から 2 名に減らし、残った作業員は<b>ロボットが取り残した物の確認</b>に専念している [3]。
+      → 本課題の「未知物体は手選別へ回す」設計は、この実運用の役割分担をそのまま写したものである。</li>
 </ul>
 
-<h2>2. 繧ｷ繧ｹ繝・Β讒区・</h2>
-<div class="fig"><img src="fig/pipeline.png" style="max-width: 34%"><div class="cap">蝗ｳ 1縲蜃ｦ逅・ヱ繧､繝励Λ繧､繝ｳ・磯搨: AI 驛ｨ蛻・・ｻ・ 繧ｷ繝溘Η繝ｬ繝ｼ繧ｿ・・/div></div>
+<h2>2. システム構成</h2>
+<div class="fig"><img src="fig/pipeline.png" style="max-width: 34%"><div class="cap">図 1　処理パイプライン（青: AI 部分、黄: シミュレータ）</div></div>
 
 <table>
-<tr><th style="width:22%">隕∫ｴ</th><th>蜀・ｮｹ</th></tr>
-<tr><td>繧ｷ繝溘Η繝ｬ繝ｼ繧ｿ</td><td>MuJoCo 3.17・・ython 繝舌う繝ｳ繝・ぅ繝ｳ繧ｰ・峨・PU 荳崎ｦ√＾SMesa 縺ｧ繝倥ャ繝峨Ξ繧ｹ謠冗判縲Ｕimestep 2 ms縲・/td></tr>
-<tr><td>繝ｭ繝懊ャ繝・/td><td>Franka Emika Panda 7 霆ｸ・・uJoCo Menagerie 繝｢繝・Ν, BSD-3・峨る未遽菴咲ｽｮ繧ｵ繝ｼ繝懊〒蛻ｶ蠕｡縲よ焔蜈医↓蜷ｸ逹繧ｰ繝ｪ繝・ヱ・・eld 遲牙ｼ乗鋸譚溘・ ON/OFF 縺ｧ讓｡謫ｬ・峨ｒ霑ｽ蜉縲・/td></tr>
-<tr><td>繧ｻ繝ｳ繧ｵ</td><td>菴懈･ｭ鬆伜沺荳頑婿 1.05 m 縺ｮ菫ｯ迸ｰ繧ｫ繝｡繝ｩ・・ovy 42ﾂｰ, 480ﾃ・80・峨３GB 縺ｨ豺ｱ蠎ｦ繧貞叙蠕励＠ RGB-D 繧ｻ繝ｳ繧ｵ・・ealSense 逶ｸ蠖難ｼ峨→縺励※菴ｿ逕ｨ縲・/td></tr>
-<tr><td>蟇ｾ雎｡迚ｩ菴・/td><td>4 邏譚・ﾃ・3 蛟・+ 譛ｪ遏･迚ｩ菴・1 蛟・= 13 蛟九ょｯｸ豕輔・濶ｲ繝ｻ蜷代″繝ｻ驟咲ｽｮ繧偵す繝ｼ繝峨＃縺ｨ縺ｫ繝ｩ繝ｳ繝繝逕滓・・医け繝ｩ繧ｹ髢薙〒濶ｲ縺碁㍾縺ｪ繧九ｈ縺・ｨｭ險医＠縲∬牡縺縺代〒縺ｯ蛻､蛻･縺ｧ縺阪↑縺・ｈ縺・↓縺励◆・峨・/td></tr>
-<tr><td>AI 繝｢繝・Ν</td><td>4ch 蜈･蜉幢ｼ・GB + 鬮倥＆繝槭ャ繝暦ｼ・6ﾃ・6 縺ｮ蟆丞梛 CNN・・onvﾃ・ + FC, 28,372 繝代Λ繝｡繝ｼ繧ｿ・峨・PU 縺ｧ邏・90 遘貞ｭｦ鄙偵・/td></tr>
-<tr><td>譛ｪ遏･迚ｩ菴捺､懷・</td><td>CNN 縺ｮ逡ｳ縺ｿ霎ｼ縺ｿ迚ｹ蠕ｴ・・4 谺｡蜈・ｼ峨↓蟇ｾ縺吶ｋ繧ｯ繝ｩ繧ｹ譚｡莉ｶ莉倥″ Mahalanobis 霍晞屬 [4]縲ょｭｦ鄙偵ョ繝ｼ繧ｿ縺ｮ 97.5 繝代・繧ｻ繝ｳ繧ｿ繧､繝ｫ繧帝明蛟､縺ｨ縺吶ｋ縲・/td></tr>
-<tr><td>蛻ｶ蠕｡</td><td>貂幄｡ｰ譛蟆丈ｺ御ｹ玲ｳ包ｼ・LS・峨↓繧医ｋ菴咲ｽｮ+蟋ｿ蜍｢縺ｮ謨ｰ蛟､ IK縲∵怙蟆剰ｺ榊ｺｦ・・ 谺｡・芽｣憺俣縲∫峩邱夊｣憺俣縺ｮ謳ｬ騾∬ｻ碁％縲・/td></tr>
+<tr><th style="width:22%">要素</th><th>内容</th></tr>
+<tr><td>シミュレータ</td><td>MuJoCo 3.17（Python バインディング）。GPU 不要、OSMesa でヘッドレス描画。timestep 2 ms。</td></tr>
+<tr><td>ロボット</td><td>Franka Emika Panda 7 軸（MuJoCo Menagerie モデル, BSD-3）。関節位置サーボで制御。手先に吸着グリッパ（weld 等式拘束の ON/OFF で模擬）を追加。</td></tr>
+<tr><td>センサ</td><td>作業領域上方 1.05 m の俯瞰カメラ（fovy 42°, 480×480）。RGB と深度を取得し RGB-D センサ（RealSense 相当）として使用。</td></tr>
+<tr><td>対象物体</td><td>4 素材 × 3 個 + 未知物体 1 個 = 13 個。寸法・色・向き・配置をシードごとにランダム生成（クラス間で色が重なるよう設計し、色だけでは判別できないようにした）。</td></tr>
+<tr><td>AI モデル</td><td>4ch 入力（RGB + 高さマップ）56×56 の小型 CNN（Conv×3 + FC, 28,372 パラメータ）。CPU で約 90 秒学習。</td></tr>
+<tr><td>未知物体検出</td><td>CNN の畳み込み特徴（64 次元）に対するクラス条件付き Mahalanobis 距離 [4]。学習データの 97.5 パーセンタイルを閾値とする。</td></tr>
+<tr><td>制御</td><td>減衰最小二乗法（DLS）による位置+姿勢の数値 IK、最小躍度（5 次）補間、直線補間の搬送軌道。</td></tr>
 </table>
 
-<h2>3. 謇区ｳ輔・隧ｳ邏ｰ</h2>
-<h3>3.1 遏･隕夲ｼ啌GB-D 縺九ｉ縺ｮ讀懷・縺ｨ菴咲ｽｮ謗ｨ螳・/h3>
+<h2>3. 手法の詳細</h2>
+<h3>3.1 知覚：RGB-D からの検出と位置推定</h3>
 <ul>
-  <li>豺ｱ蠎ｦ逕ｻ蜒上ｒ繧ｫ繝｡繝ｩ鬮倥＆縺九ｉ蠑輔＞縺ｦ縲碁ｫ倥＆繝槭ャ繝励阪ｒ菴懊ｊ縲√・繝ｫ繝磯擇繧医ｊ 1.2 cm 莉･荳企ｫ倥＞逕ｻ邏繧貞燕譎ｯ縺ｨ縺励※騾｣邨先・蛻・Λ繝吶Μ繝ｳ繧ｰ縺ｧ迚ｩ菴薙↓蛻・￠繧九・/li>
-  <li>蜷・黄菴薙・<b>荳企擇鬮倥＆ z<sub>top</sub></b>・磯ｫ倥＆縺ｮ 90 繝代・繧ｻ繝ｳ繧ｿ繧､繝ｫ・峨ｒ豎ゅａ縲∽ｸ企擇逕ｻ邏縺ｮ縺ｿ縺ｧ驥榊ｿ・ｒ蜿悶ｋ縺薙→縺ｧ縲∝・髱｢縺瑚ｦ九∴繧矩剰ｦ匁ｭｪ縺ｿ縺ｫ繧医ｋ菴咲ｽｮ縺壹ｌ繧呈椛縺医◆縲・/li>
-  <li>繝斐Φ繝帙・繝ｫ繝｢繝・Ν <code>f = (H/2)/tan(fovy/2)</code> 縺ｧ逕ｻ邏竊偵Ρ繝ｼ繝ｫ繝牙ｺｧ讓吶↓騾・兜蠖ｱ・・ = z<sub>top</sub> 蟷ｳ髱｢・峨・      讀懆ｨｼ縺ｧ縺ｯ逵溷､縺ｨ縺ｮ蟷ｳ蝮・ｪ､蟾ｮ 0.6 cm縲∵怙螟ｧ 1.3 cm 縺ｧ縲∝精逹繝代ャ繝会ｼ亥濠蠕・2 cm・峨・險ｱ螳ｹ蜀・↓蜿弱∪縺｣縺溘・/li>
+  <li>深度画像をカメラ高さから引いて「高さマップ」を作り、ベルト面より 1.2 cm 以上高い画素を前景として連結成分ラベリングで物体に分ける。</li>
+  <li>各物体の<b>上面高さ z<sub>top</sub></b>（高さの 90 パーセンタイル）を求め、上面画素のみで重心を取ることで、側面が見える透視歪みによる位置ずれを抑えた。</li>
+  <li>ピンホールモデル <code>f = (H/2)/tan(fovy/2)</code> で画素→ワールド座標に逆投影（z = z<sub>top</sub> 平面）。
+      検証では真値との平均誤差 0.6 cm、最大 1.3 cm で、吸着パッド（半径 2 cm）の許容内に収まった。</li>
 </ul>
-<h3>3.2 隱崎ｭ假ｼ咾NN 縺ｫ繧医ｋ邏譚仙・鬘橸ｼ亥ｭｦ鄙・+ 謗ｨ隲厄ｼ・/h3>
+<h3>3.2 認識：CNN による素材分類（学習 + 推論）</h3>
 <ul>
-  <li><b>繝・・繧ｿ逕滓・</b>・壹Λ繝ｳ繝繝繧ｷ繝ｼ繝ｳ繧・320 蛟狗函謌舌＠縲∵､懷・蝎ｨ縺悟・繧雁・縺励◆繧ｯ繝ｭ繝・・縺ｫ逵溷､繝ｩ繝吶Ν繧剃ｻ倅ｸ趣ｼ・,874 繧ｵ繝ｳ繝励Ν・峨・      蟄ｦ鄙呈凾縺ｨ蜷後§讀懷・蝎ｨ繧帝壹☆縺薙→縺ｧ縲∝ｭｦ鄙偵ョ繝ｼ繧ｿ縺ｨ螳溯｡梧凾縺ｮ蜈･蜉帛・蟶・ｒ荳閾ｴ縺輔○縺溘・/li>
-  <li><b>蜈･蜉・/b>・啌GB 3ch + 鬮倥＆ 1ch縲るｫ倥＆繝√Ε繝阪Ν縺ｫ繧医ｊ縲瑚レ縺ｮ鬮倥＞ PET・丈ｽ弱＞郛ｶ縲阪↑縺ｩ<b>蠖｢迥ｶ</b>諠・ｱ繧定牡縺ｨ蜷梧凾縺ｫ蟄ｦ鄙偵〒縺阪ｋ縲・/li>
-  <li><b>蟄ｦ鄙・/b>・壹す繝ｼ繝ｳ蜊倅ｽ阪〒 8:2 縺ｫ蛻・牡・亥酔荳繧ｷ繝ｼ繝ｳ縺ｮ迚ｩ菴薙′荳｡譁ｹ縺ｫ蜈･繧九Μ繝ｼ繧ｯ繧帝亟豁｢・峨∝ｹｳ陦檎ｧｻ蜍輔・蜿崎ｻ｢繝ｻ譏弱ｋ縺輔・諡｡蠑ｵ縲、damW + cosine 貂幄｡ｰ縲・0 繧ｨ繝昴ャ繧ｯ縲・/li>
-  <li><b>譛ｪ遏･迚ｩ菴捺､懷・</b>・嘖oftmax 譛螟ｧ遒ｺ邇・・譛ｪ遏･迚ｩ菴薙↓繧・0.9 莉･荳翫ｒ蜃ｺ縺吶％縺ｨ縺悟､壹￥・域､懆ｨｼ縺ｧ縺ｮ譽・唆邇・12.5%・峨・      迚ｹ蠕ｴ遨ｺ髢薙・ Mahalanobis 霍晞屬縺ｫ蛻・ｊ譖ｿ縺医※<b>譽・唆邇・73.4%</b>・域里遏･迚ｩ菴薙・隱､譽・唆 1.4%・峨∪縺ｧ謾ｹ蝟・＠縺溘・      蜈ｨ邨仙粋螻､縺ｮ迚ｹ蠕ｴ繧医ｊ逡ｳ縺ｿ霎ｼ縺ｿ螻､縺ｮ迚ｹ蠕ｴ縺ｮ譁ｹ縺瑚憶縺擾ｼ・2% 竊・73%・峨∝・鬘槭↓迚ｹ蛹悶＠縺溷ｱ､縺ｻ縺ｩ譛ｪ遏･繧定ｦ句・縺代ｋ諠・ｱ縺悟､ｱ繧上ｌ繧九→縺・≧遏･隕九ｒ蠕励◆縲・/li>
+  <li><b>データ生成</b>：ランダムシーンを 320 個生成し、検出器が切り出したクロップに真値ラベルを付与（2,874 サンプル）。
+      学習時と同じ検出器を通すことで、学習データと実行時の入力分布を一致させた。</li>
+  <li><b>入力</b>：RGB 3ch + 高さ 1ch。高さチャネルにより「背の高い PET／低い缶」など<b>形状</b>情報を色と同時に学習できる。</li>
+  <li><b>学習</b>：シーン単位で 8:2 に分割（同一シーンの物体が両方に入るリークを防止）、平行移動・反転・明るさの拡張、AdamW + cosine 減衰、30 エポック。</li>
+  <li><b>未知物体検出</b>：softmax 最大確率は未知物体にも 0.9 以上を出すことが多く（検証での棄却率 12.5%）、
+      特徴空間の Mahalanobis 距離に切り替えて<b>棄却率 73.4%</b>（既知物体の誤棄却 1.4%）まで改善した。
+      全結合層の特徴より畳み込み層の特徴の方が良く（52% → 73%）、分類に特化した層ほど未知を見分ける情報が失われるという知見を得た。</li>
 </ul>
-<h3>3.3 陦悟虚・唔K 縺ｨ謚頑戟繝ｻ謳ｬ騾・/h3>
+<h3>3.3 行動：IK と把持・搬送</h3>
 <ul>
-  <li>IK 縺ｯ謇句・繧ｵ繧､繝茨ｼ亥精逹繝代ャ繝牙・遶ｯ・峨・菴咲ｽｮ隱､蟾ｮ縺ｨ縲檎悄荳句髄縺阪榊ｧｿ蜍｢隱､蟾ｮ繧・6 谺｡蜈・ｪ､蟾ｮ縺ｨ縺励※ DLS 縺ｧ蜿榊ｾｩ隗｣豕輔る未遽髯千阜縺ｯ繧ｯ繝ｪ繝・・縺ｧ蜃ｦ逅・・/li>
-  <li>謚頑戟縺ｯ荳顔ｩｺ 15 cm 縺九ｉ逶ｴ邱夐剄荳・竊・蜷ｸ逹 竊・逶ｴ邱壻ｸ頑・縲よ成騾√・<b>荳譌ｦ 30 cm 縺ｾ縺ｧ荳翫￡縺ｦ縺九ｉ豌ｴ蟷ｳ逶ｴ邱夂ｧｻ蜍・/b>縺励∵滑謖∫黄菴薙・蠎暮擇縺御ｻ悶・迚ｩ菴薙ｄ繝薙Φ螢√↓蠖薙◆繧峨↑縺・ｫ倥＆繧剃ｿ昴▽縲・/li>
-  <li>謚募・縺ｯ迚ｩ菴馴ｫ倥＆縺ｫ蠢懊§縺溯ｧ｣謾ｾ鬮倥＆・亥ｺ暮擇縺後ン繝ｳ蠎翫°繧・4 cm・峨〒關ｽ荳玖｡晄茶繧呈椛縺医∝酔縺倥ン繝ｳ縺ｫ縺ｯ 3 縺､縺ｮ繧ｹ繝ｭ繝・ヨ縺ｫ鬆・↓鄂ｮ縺・※遨阪∩驥阪↑繧翫ｒ髦ｲ縺舌・/li>
-  <li>蜷ｸ逹縺ｫ螟ｱ謨励＠縺溷ｴ蜷医・縺昴・菴咲ｽｮ繧貞ｾ悟屓縺励↓縺励※蜀崎ｦｳ貂ｬ縺吶ｋ・磯哩繝ｫ繝ｼ繝励↓繧医ｋ閾ｪ蟾ｱ蝗槫ｾｩ・峨・/li>
+  <li>IK は手先サイト（吸着パッド先端）の位置誤差と「真下向き」姿勢誤差を 6 次元誤差として DLS で反復解法。関節限界はクリップで処理。</li>
+  <li>把持は上空 15 cm から直線降下 → 吸着 → 直線上昇。搬送は<b>一旦 30 cm まで上げてから水平直線移動</b>し、把持物体の底面が他の物体やビン壁に当たらない高さを保つ。</li>
+  <li>投入は物体高さに応じた解放高さ（底面がビン床から 4 cm）で落下衝撃を抑え、同じビンには 3 つのスロットに順に置いて積み重なりを防ぐ。</li>
+  <li>吸着に失敗した場合はその位置を後回しにして再観測する（閉ループによる自己回復）。</li>
 </ul>
 
-<h2 class="pb">4. 邨先棡</h2>
-<h3>4.1 CNN 縺ｮ蟄ｦ鄙偵・隧穂ｾ｡・域､懆ｨｼ繝・・繧ｿ 512 繧ｵ繝ｳ繝励Ν + 譛ｪ遏･ 64 繧ｵ繝ｳ繝励Ν・・/h3>
-<div class="fig"><img src="fig/training_summary.png"><div class="cap">蝗ｳ 2縲蟄ｦ鄙呈峇邱夲ｼ亥ｷｦ・峨∵､懆ｨｼ豺ｷ蜷瑚｡悟・・井ｸｭ・峨∵悴遏･迚ｩ菴捺､懷・縺ｮ霍晞屬蛻・ｸ・ｼ亥承・・/div></div>
+<h2 class="pb">4. 結果</h2>
+<h3>4.1 CNN の学習・評価（検証データ 512 サンプル + 未知 64 サンプル）</h3>
+<div class="fig"><img src="fig/training_summary.png"><div class="cap">図 2　学習曲線（左）、検証混同行列（中）、未知物体検出の距離分布（右）</div></div>
 <table>
-<tr><th>謖・ｨ・/th><th class="num">蛟､</th><th>蛯呵・/th></tr>
-<tr><td>譌｢遏･ 4 繧ｯ繝ｩ繧ｹ 豁｣隗｣邇・ｼ域｣・唆縺ｪ縺暦ｼ・/td><td class="num">100.0 %</td><td>讀懆ｨｼ 512 繧ｵ繝ｳ繝励Ν縲・ 繧ｯ繝ｩ繧ｹ髢薙・蜿悶ｊ驕輔∴縺ｯ 0</td></tr>
-<tr><td>譌｢遏･ 4 繧ｯ繝ｩ繧ｹ 豁｣隗｣邇・ｼ域｣・唆縺ゅｊ・・/td><td class="num">98.6 %</td><td>隱､譽・唆 1.4 % 縺ｯ縲梧焔驕ｸ蛻･縲阪∈蝗槭ｋ螳牙・蛛ｴ縺ｮ螟ｱ謨・/td></tr>
-<tr><td>譛ｪ遏･迚ｩ菴・譽・唆邇・ｼ・ahalanobis・・/td><td class="num">73.4 %</td><td>softmax 髢ｾ蛟､ 0.8 縺ｮ縺ｿ縺ｧ縺ｯ 12.5 %</td></tr>
-<tr><td>繝｢繝・Ν繧ｵ繧､繧ｺ・丞ｭｦ鄙呈凾髢・/td><td class="num">28,372 繝代Λ繝｡繝ｼ繧ｿ・冗ｴ・90 遘・/td><td>CPU 2 繧ｳ繧｢</td></tr>
+<tr><th>指標</th><th class="num">値</th><th>備考</th></tr>
+<tr><td>既知 4 クラス 正解率（棄却なし）</td><td class="num">100.0 %</td><td>検証 512 サンプル。4 クラス間の取り違えは 0</td></tr>
+<tr><td>既知 4 クラス 正解率（棄却あり）</td><td class="num">98.6 %</td><td>誤棄却 1.4 % は「手選別」へ回る安全側の失敗</td></tr>
+<tr><td>未知物体 棄却率（Mahalanobis）</td><td class="num">73.4 %</td><td>softmax 閾値 0.8 のみでは 12.5 %</td></tr>
+<tr><td>モデルサイズ／学習時間</td><td class="num">28,372 パラメータ／約 90 秒</td><td>CPU 2 コア</td></tr>
 </table>
 
-<h3>4.2 莉募・縺代ち繧ｹ繧ｯ縺ｮ邨ｱ蜷郁ｩ穂ｾ｡・亥虚逕ｻ縺ｨ縺ｯ蛻･縺ｮ 20 繧ｷ繝ｼ繝・ﾃ・13 迚ｩ菴・= 260 迚ｩ菴難ｼ・/h3>
+<h3>4.2 仕分けタスクの統合評価（動画とは別の 20 シード × 13 物体 = 260 物体）</h3>
 <div class="two">
 <div>
 <table>
-<tr><th>豁｣隗｣・ｼ莠域ｸｬ</th><th class="num">PET</th><th class="num">郛ｶ</th><th class="num">邏・/th><th class="num">繧ｬ繝ｩ繧ｹ</th><th class="num">譛ｪ遏･</th></tr>
+<tr><th>正解＼予測</th><th class="num">PET</th><th class="num">缶</th><th class="num">紙</th><th class="num">ガラス</th><th class="num">未知</th></tr>
 <tr><td>PET (60)</td><td class="num"><b>60</b></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
-<tr><td>郛ｶ (60)</td><td class="num">0</td><td class="num"><b>59</b></td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
-<tr><td>邏吶ヱ繝・け (60)</td><td class="num">0</td><td class="num">0</td><td class="num"><b>54</b></td><td class="num">0</td><td class="num">6</td></tr>
-<tr><td>繧ｬ繝ｩ繧ｹ (60)</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num"><b>57</b></td><td class="num">3</td></tr>
-<tr><td>譛ｪ遏･ (20)</td><td class="num">0</td><td class="num">5</td><td class="num">0</td><td class="num">0</td><td class="num"><b>15</b></td></tr>
+<tr><td>缶 (60)</td><td class="num">0</td><td class="num"><b>59</b></td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
+<tr><td>紙パック (60)</td><td class="num">0</td><td class="num">0</td><td class="num"><b>54</b></td><td class="num">0</td><td class="num">6</td></tr>
+<tr><td>ガラス (60)</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num"><b>57</b></td><td class="num">3</td></tr>
+<tr><td>未知 (20)</td><td class="num">0</td><td class="num">5</td><td class="num">0</td><td class="num">0</td><td class="num"><b>15</b></td></tr>
 </table>
 </div>
 <div>
 <table>
-<tr><th>謖・ｨ・/th><th class="num">蛟､</th></tr>
-<tr><td>謚頑戟謌仙粥・亥精逹螟ｱ謨・0 蝗橸ｼ・/td><td class="num">260 / 260</td></tr>
-<tr><td>邏譚仙愛螳壹′豁｣縺励°縺｣縺溽黄菴・/td><td class="num">245 / 260・・4.2 %・・/td></tr>
-<tr><td>縺・■譌｢遏･邏譚舌・蜿悶ｊ驕輔∴</td><td class="num">0 / 240</td></tr>
-<tr><td>譛邨ら噪縺ｫ豁｣縺励＞繝薙Φ縺ｫ蜈･縺｣縺溽黄菴・/td><td class="num">244 / 260・・3.8 %・・/td></tr>
-<tr><td>謳ｬ騾√・謚募・縺ｮ迚ｩ逅・噪螟ｱ謨・/td><td class="num">1 / 260</td></tr>
-<tr><td>1 繧ｷ繝ｼ繝ｳ・・3 蛟具ｼ峨・謇隕∵凾髢・/td><td class="num">蟷ｳ蝮・83 遘抵ｼ・.4 遘・蛟具ｼ・/td></tr>
+<tr><th>指標</th><th class="num">値</th></tr>
+<tr><td>把持成功（吸着失敗 0 回）</td><td class="num">260 / 260</td></tr>
+<tr><td>素材判定が正しかった物体</td><td class="num">245 / 260（94.2 %）</td></tr>
+<tr><td>うち既知素材の取り違え</td><td class="num">0 / 240</td></tr>
+<tr><td>最終的に正しいビンに入った物体</td><td class="num">244 / 260（93.8 %）</td></tr>
+<tr><td>搬送・投入の物理的失敗</td><td class="num">1 / 260</td></tr>
+<tr><td>1 シーン（13 個）の所要時間</td><td class="num">平均 83 秒（6.4 秒/個）</td></tr>
 </table>
 </div>
 </div>
-<p class="small">窶ｻ 隱､繧翫・縺吶∋縺ｦ縲梧里遏･竊呈悴遏･・域焔驕ｸ蛻･陦後″・峨・0 莉ｶ縺ｨ縲梧悴遏･竊堤ｼｶ縲・ 莉ｶ縺ｧ縲∵里遏･邏譚仙酔螢ｫ縺ｮ蜿悶ｊ驕輔∴縺ｯ逋ｺ逕溘＠縺ｪ縺九▲縺溘・譛ｪ遏･竊堤ｼｶ縺ｯ逅・ｽ薙ｒ荳翫°繧芽ｦ九◆蜀・ｽ｢縺檎ｼｶ縺ｨ莨ｼ繧九◆繧√〒縲∵悴遏･迚ｩ菴捺､懷・縺ｮ髯千阜縺ｨ縺励※ 6 遶縺ｧ閠・ｯ溘☆繧九・/p>
+<p class="small">※ 誤りはすべて「既知→未知（手選別行き）」10 件と「未知→缶」5 件で、既知素材同士の取り違えは発生しなかった。
+未知→缶は球体を上から見た円形が缶と似るためで、未知物体検出の限界として 6 章で考察する。</p>
 
-<h3>4.3 蜍慕判・医す繝ｼ繝・7, 13 迚ｩ菴難ｼ・/h3>
-<div class="fig"><img src="fig/frames.png"><div class="cap">蝗ｳ 3縲蜍慕判縺ｮ謚懃ｲ九ょ承荳・ 菫ｯ迸ｰ繧ｫ繝｡繝ｩ縺ｮ讀懷・繝ｻ蛻・｡樒ｵ先棡縲∝承荳ｭ: 蟇ｾ雎｡迚ｩ菴薙・繧ｯ繝ｩ繧ｹ遒ｺ邇・∝ｷｦ荳・ 謚募・髮・ｨ・/div></div>
-<p>蜍慕判縺ｧ縺ｯ 13 蛟九☆縺ｹ縺ｦ繧呈滑謖√＠縲∫ｴ譚仙愛螳・13/13 豁｣隗｣縲∵悴遏･迚ｩ菴・1 蛟九ｒ縲梧焔驕ｸ蛻･縲阪ン繝ｳ縺ｸ豁｣縺励￥騾驕ｿ縺輔○縺滂ｼ域園隕・84 遘・ 遲牙埼滂ｼ峨・/p>
+<h3>4.3 動画（シード 7, 13 物体）</h3>
+<div class="fig"><img src="fig/frames.png"><div class="cap">図 3　動画の抜粋。右上: 俯瞰カメラの検出・分類結果、右中: 対象物体のクラス確率、左下: 投入集計</div></div>
+<p>動画では 13 個すべてを把持し、素材判定 13/13 正解、未知物体 1 個を「手選別」ビンへ正しく退避させた（所要 84 秒, 等倍速）。</p>
 
-<h2>5. 蟾･螟ｫ縺励◆轤ｹ・郁ｩ穂ｾ｡蝓ｺ貅悶→縺ｮ蟇ｾ蠢懶ｼ・/h2>
+<h2>5. 工夫した点（評価基準との対応）</h2>
 <table>
-<tr><th style="width:14%">隕ｳ轤ｹ</th><th>蜀・ｮｹ</th></tr>
-<tr><td>蜑ｵ騾諤ｧ</td><td>縲悟・縺九ｉ縺ｪ縺・黄縺ｯ蛻・°繧峨↑縺・→險縺・AI縲阪ｒ莉募・縺代Ο繝懊ャ繝医↓邨・∩霎ｼ縺ｿ縲∵悴遏･迚ｩ菴薙ｒ謇矩∈蛻･縺ｸ蝗槭☆<b>莠ｺ縺ｨ繝ｭ繝懊ャ繝医・蛻・･ｭ</b>繧貞・迴ｾ縺励◆縲・    RGB 縺ｫ鬮倥＆繝槭ャ繝励ｒ蜉縺医◆ 4ch 蜈･蜉帙〒縲∬牡縺ｮ莨ｼ縺溽ｴ譚舌ｒ蠖｢迥ｶ縺ｧ蛻､蛻･縺ｧ縺阪ｋ繧医≧縺ｫ縺励◆縲・/td></tr>
-<tr><td>謚陦灘鴨</td><td>遏･隕夲ｼ・GB-D 繧ｻ繧ｰ繝｡繝ｳ繝・・繧ｷ繝ｧ繝ｳ繝ｻ騾・兜蠖ｱ・峨∝ｭｦ鄙抵ｼ亥粋謌舌ョ繝ｼ繧ｿ逕滓・竊辰NN 蟄ｦ鄙停・OOD 讀懷・蝎ｨ縺ｮ繝輔ぅ繝・ユ繧｣繝ｳ繧ｰ・峨・    蛻ｶ蠕｡・域焚蛟､ IK繝ｻ5 谺｡陬憺俣繝ｻ逶ｴ邱壽成騾√・蜷ｸ逹諡俶據・峨ｒ縺吶∋縺ｦ閾ｪ菴懊＠縲ヽOS 遲峨・繝輔Ξ繝ｼ繝繝ｯ繝ｼ繧ｯ辟｡縺励〒 1 譛ｬ縺ｮ繝代う繝励Λ繧､繝ｳ縺ｫ邨ｱ蜷医＠縺溘る哩繝ｫ繝ｼ繝励〒螟ｱ謨励°繧芽・蟾ｱ蝗槫ｾｩ縺吶ｋ縲・/td></tr>
-<tr><td>螳溽畑諤ｧ</td><td>螳溷惠縺吶ｋ AI 驕ｸ蛻･繝ｭ繝懊ャ繝茨ｼ・MP Cortex縲√す繧ｿ繝ｩ闊育肇縺ｮ蟆主・莠倶ｾ具ｼ峨→蜷後§縲窟I 蛻､螳・竊・繝斐ャ繧ｯ 竊・谿九ｊ縺ｯ莠ｺ縺檎｢ｺ隱阪阪・讒区・縲・    GPU 辟｡縺励・CPU 2 繧ｳ繧｢縺ｧ蟄ｦ鄙偵°繧牙虚逕ｻ逕滓・縺ｾ縺ｧ螳檎ｵ舌☆繧九◆繧√∝・迴ｾ繧ｳ繧ｹ繝医′菴弱＞縲・/td></tr>
-<tr><td>陦ｨ迴ｾ蜉・/td><td>蜍慕判縺ｫ繧ｫ繝｡繝ｩ隕也せ縺ｮ讀懷・譫繝ｻ繧ｯ繝ｩ繧ｹ遒ｺ邇・ヰ繝ｼ繝ｻ繝輔ぉ繝ｼ繧ｺ繝ｻ髮・ｨ医ｒ繝ｪ繧｢繝ｫ繧ｿ繧､繝縺ｫ驥咲糞縺励・b>AI 縺御ｽ輔ｒ隕九※菴輔ｒ蛻､譁ｭ縺励※縺・ｋ縺・/b>繧貞庄隕門喧縺励◆縲・/td></tr>
+<tr><th style="width:14%">観点</th><th>内容</th></tr>
+<tr><td>創造性</td><td>「分からない物は分からないと言う AI」を仕分けロボットに組み込み、未知物体を手選別へ回す<b>人とロボットの分業</b>を再現した。
+    RGB に高さマップを加えた 4ch 入力で、色の似た素材を形状で判別できるようにした。</td></tr>
+<tr><td>技術力</td><td>知覚（RGB-D セグメンテーション・逆投影）、学習（合成データ生成→CNN 学習→OOD 検出器のフィッティング）、
+    制御（数値 IK・5 次補間・直線搬送・吸着拘束）をすべて自作し、ROS 等のフレームワーク無しで 1 本のパイプラインに統合した。閉ループで失敗から自己回復する。</td></tr>
+<tr><td>実用性</td><td>実在する AI 選別ロボット（AMP Cortex、シタラ興産の導入事例）と同じ「AI 判定 → ピック → 残りは人が確認」の構成。
+    GPU 無し・CPU 2 コアで学習から動画生成まで完結するため、再現コストが低い。</td></tr>
+<tr><td>表現力</td><td>動画にカメラ視点の検出枠・クラス確率バー・フェーズ・集計をリアルタイムに重畳し、<b>AI が何を見て何を判断しているか</b>を可視化した。</td></tr>
 </table>
 
-<h2>6. 閠・ｯ溘・蜿咲怐轤ｹ繝ｻ莉雁ｾ後・隱ｲ鬘・/h2>
+<h2>6. 考察・反省点・今後の課題</h2>
 <ul>
-  <li><b>譛ｪ遏･迚ｩ菴薙・蜿悶ｊ縺薙⊂縺暦ｼ・5 %・・/b>・夂帥菴薙・菫ｯ迸ｰ縺九ｉ縺ｯ郛ｶ縺ｨ蜷後§蜀・ｽ｢縺ｧ縲・ｫ倥＆繧りｿ代＞縺溘ａ迚ｹ蠕ｴ遨ｺ髢薙〒郛ｶ繧ｯ繝ｩ繧ｹ縺ｫ驥阪↑繧九・      螟夊ｦ也せ繧ｫ繝｡繝ｩ繧・ｷｱ蠎ｦ縺ｮ蠖｢迥ｶ險倩ｿｰ蟄撰ｼ域峇邇・ｼ峨ｒ迚ｹ蠕ｴ縺ｫ蜉縺医ｋ縲√≠繧九＞縺ｯ Outlier Exposure 縺ｧ縲後◎縺ｮ莉悶阪・螟壽ｧ倥↑蠖｢迥ｶ繧貞ｭｦ鄙呈凾縺ｫ隕九○繧九％縺ｨ縺ｧ謾ｹ蝟・〒縺阪ｋ縲・/li>
-  <li><b>譌｢遏･迚ｩ菴薙・隱､譽・唆・・.2 %・・/b>縺梧､懆ｨｼ譎ゑｼ・.4 %・峨ｈ繧企ｫ倥＞縲ょｮ溯｡梧凾縺ｯ 13 蛟九′蟇・寔縺励√け繝ｭ繝・・縺ｫ髫｣謗･迚ｩ菴薙′蜀吶ｊ霎ｼ繧縺溘ａ蛻・ｸ・′縺壹ｌ繧九・      蟄ｦ鄙偵ョ繝ｼ繧ｿ繧ょｯ・寔繧ｷ繝ｼ繝ｳ縺ｧ逕滓・縺吶ｋ縲√け繝ｭ繝・・繧貞燕譎ｯ繝槭せ繧ｯ縺ｧ蛻・ｊ謚懊￥縺ｪ縺ｩ縺ｮ蟇ｾ遲悶′閠・∴繧峨ｌ繧九・/li>
-  <li><b>謚頑戟縺ｮ邁｡逡･蛹・/b>・壼精逹繧・weld 諡俶據縺ｧ讓｡謫ｬ縺励※縺翫ｊ縲∝精逹髱｢縺ｮ蛯ｾ縺阪・驥埼㍼繝ｻ逵溽ｩｺ貍上ｌ縺ｯ謇ｱ縺｣縺ｦ縺・↑縺・・      Panda 縺ｮ蟷ｳ陦後げ繝ｪ繝・ヱ縺ｧ螳滄圀縺ｫ謖溘・謚頑戟・域磁隗ｦ蜉帛ｭｦ・峨↓鄂ｮ縺肴鋤縺医ｋ縺ｮ縺梧ｬ｡縺ｮ谿ｵ髫弱〒縺ゅｋ縲・/li>
-  <li><b>Sim-to-Real</b>・壼粋謌舌ョ繝ｼ繧ｿ縺ｯ辣ｧ譏弱・繝・け繧ｹ繝√Ε縺悟腰邏斐〒縲∝ｮ溽判蜒上〒縺ｯ繝峨Γ繧､繝ｳ繝ｩ繝ｳ繝繝槭う繧ｼ繝ｼ繧ｷ繝ｧ繝ｳ縺悟ｿ・ｦ√・      荳譁ｹ縲∵ｷｱ蠎ｦ繝吶・繧ｹ縺ｮ讀懷・縺ｨ鬮倥＆繝√Ε繝阪Ν縺ｯ辣ｧ譏主､牙喧縺ｫ蠑ｷ縺上∝ｮ滓ｩ溽ｧｻ陦梧凾縺ｮ雜ｳ縺後°繧翫↓縺ｪ繧九・/li>
-  <li><b>髢狗匱縺ｧ隧ｰ縺ｾ縺｣縺溽せ</b>・・1) 謳ｬ騾・ｫ倥＆縺御ｽ弱￥謚頑戟迚ｩ菴薙′莉悶・迚ｩ菴薙ｒ縺ｪ縺主偵＠縺・竊・30 cm 縺ｾ縺ｧ荳翫￡縺ｦ逶ｴ邱壽成騾√↓螟画峩縲・      (2) 繝薙Φ縺ｫ 3 蛟句・繧後ｋ縺ｨ遨阪∩驥阪↑縺｣縺ｦ貅｢繧後◆ 竊・繝薙Φ繧呈僑螟ｧ縺励せ繝ｭ繝・ヨ謚募・縺ｫ螟画峩縲・3) 蜷ｸ逹譎ゅ・荳ｭ蠢・★繧後〒迚ｩ菴薙′繝薙Φ螢√↓荵励▲縺・竊・繧ｹ繝ｭ繝・ヨ髢馴囈繝ｻ繝薙Φ蟇ｸ豕輔ｒ蜀崎ｨｭ險医・      縺・★繧後ｂ迚ｩ菴謎ｽ咲ｽｮ縺ｮ繝ｭ繧ｰ繧貞叙縺｣縺ｦ縲後＞縺､繝ｻ隱ｰ縺悟虚縺九＠縺溘°縲阪ｒ迚ｹ螳壹☆繧九％縺ｨ縺ｧ隗｣豎ｺ縺励◆縲・/li>
+  <li><b>未知物体の取りこぼし（25 %）</b>：球体は俯瞰からは缶と同じ円形で、高さも近いため特徴空間で缶クラスに重なる。
+      多視点カメラや深度の形状記述子（曲率）を特徴に加える、あるいは Outlier Exposure で「その他」の多様な形状を学習時に見せることで改善できる。</li>
+  <li><b>既知物体の誤棄却（4.2 %）</b>が検証時（1.4 %）より高い。実行時は 13 個が密集し、クロップに隣接物体が写り込むため分布がずれる。
+      学習データも密集シーンで生成する、クロップを前景マスクで切り抜くなどの対策が考えられる。</li>
+  <li><b>把持の簡略化</b>：吸着を weld 拘束で模擬しており、吸着面の傾き・重量・真空漏れは扱っていない。
+      Panda の平行グリッパで実際に挟む把持（接触力学）に置き換えるのが次の段階である。</li>
+  <li><b>Sim-to-Real</b>：合成データは照明・テクスチャが単純で、実画像ではドメインランダマイゼーションが必要。
+      一方、深度ベースの検出と高さチャネルは照明変化に強く、実機移行時の足がかりになる。</li>
+  <li><b>開発で詰まった点</b>：(1) 搬送高さが低く把持物体が他の物体をなぎ倒した → 30 cm まで上げて直線搬送に変更。
+      (2) ビンに 3 個入れると積み重なって溢れた → ビンを拡大しスロット投入に変更。(3) 吸着時の中心ずれで物体がビン壁に乗った → スロット間隔・ビン寸法を再設計。
+      いずれも物体位置のログを取って「いつ・誰が動かしたか」を特定することで解決した。</li>
 </ul>
 
-<h2>7. 蜀咲樟謇矩・/h2>
-<pre>git clone &lt;繝ｪ繝昴ず繝医ΜURL&gt; &amp;&amp; cd pai-sorting-robot
-pip install -r requirements.txt            # mujoco, torch(CPU蜿ｯ), numpy, scipy, pillow, imageio[ffmpeg], matplotlib
-# Linux 縺ｧ繝倥ャ繝峨Ξ繧ｹ謠冗判縺吶ｋ蝣ｴ蜷・ sudo apt install libosmesa6 ; export MUJOCO_GL=osmesa・・PU 縺後≠繧後・ egl・・python src/gen_dataset.py --scenes 320     # 蜷域・繝・・繧ｿ逕滓・ (邏・蛻・ data/dataset.npz)
-python src/train.py --epochs 30            # CNN 蟄ｦ鄙・+ 譛ｪ遏･讀懷・蝎ｨ (邏・0遘・ models/sorter_cnn.pt, outputs/training_summary.png)
-python src/run_task.py --seed 7 --n_per_class 3 --n_unknown 1 --out outputs/sorting_demo.mp4   # 蜍慕判逕滓・ (邏・0蛻・
-python src/run_task.py --seed 100 --no_video --n_per_class 3     # 蜍慕判縺ｪ縺鈴ｫ倬溯ｩ穂ｾ｡ (邏・0遘・</pre>
+<h2>7. 再現手順</h2>
+<pre>git clone https://github.com/ngokiya/pai-sorting-robot.git &amp;&amp; cd pai-sorting-robot
+pip install -r requirements.txt            # mujoco, torch(CPU可), numpy, scipy, pillow, imageio[ffmpeg], matplotlib
+# Linux でヘッドレス描画する場合: sudo apt install libosmesa6 ; export MUJOCO_GL=osmesa（GPU があれば egl）
+python src/gen_dataset.py --scenes 320     # 合成データ生成 (約4分, data/dataset.npz)
+python src/train.py --epochs 30            # CNN 学習 + 未知検出器 (約90秒, models/sorter_cnn.pt, outputs/training_summary.png)
+python src/run_task.py --seed 7 --n_per_class 3 --n_unknown 1 --out outputs/sorting_demo.mp4   # 動画生成 (約20分)
+python src/run_task.py --seed 100 --no_video --n_per_class 3     # 動画なし高速評価 (約10秒)</pre>
 <table>
-<tr><th>繝輔ぃ繧､繝ｫ</th><th>蠖ｹ蜑ｲ</th></tr>
-<tr><td><code>src/scene.py</code></td><td>繧ｷ繝ｼ繝ｳ逕滓・・医ユ繝ｼ繝悶Ν繝ｻ繝薙Φ繝ｻ迚ｩ菴薙・繝ｩ繝ｳ繝繝逕滓・繝ｻ繧ｫ繝｡繝ｩ繝ｻ逕ｻ邏竊斐Ρ繝ｼ繝ｫ繝牙､画鋤・・/td></tr>
-<tr><td><code>src/perception.py</code></td><td>RGB-D 蜿門ｾ励∝燕譎ｯ謚ｽ蜃ｺ繝ｻ騾｣邨先・蛻・∽ｽ咲ｽｮ謗ｨ螳壹√け繝ｭ繝・・逕滓・</td></tr>
-<tr><td><code>src/gen_dataset.py</code></td><td>蜷域・繝・・繧ｿ逕滓・</td></tr>
-<tr><td><code>src/train.py</code></td><td>CNN 螳夂ｾｩ繝ｻ蟄ｦ鄙偵・Mahalanobis 譛ｪ遏･讀懷・蝎ｨ繝ｻ隧穂ｾ｡蝗ｳ</td></tr>
-<tr><td><code>src/robot.py</code></td><td>謨ｰ蛟､ IK縲∬ｻ碁％陬憺俣縲∝精逹繧ｰ繝ｪ繝・ヱ縲｝ick / place</td></tr>
-<tr><td><code>src/run_task.py</code></td><td>髢峨Ν繝ｼ繝嶺ｻ募・縺代ち繧ｹ繧ｯ縺ｮ螳溯｡後∝虚逕ｻ繧ｪ繝ｼ繝舌・繝ｬ繧､縲∫ｵ先棡 JSON</td></tr>
-<tr><td><code>assets/panda.xml</code></td><td>MuJoCo Menagerie 縺ｮ Panda 縺ｫ蜷ｸ逹繝・・繝ｫ・医し繧､繝茨ｼ峨ｒ霑ｽ蜉縺励◆繧ゅ・</td></tr>
+<tr><th>ファイル</th><th>役割</th></tr>
+<tr><td><code>src/scene.py</code></td><td>シーン生成（テーブル・ビン・物体のランダム生成・カメラ・画素↔ワールド変換）</td></tr>
+<tr><td><code>src/perception.py</code></td><td>RGB-D 取得、前景抽出・連結成分、位置推定、クロップ生成</td></tr>
+<tr><td><code>src/gen_dataset.py</code></td><td>合成データ生成</td></tr>
+<tr><td><code>src/train.py</code></td><td>CNN 定義・学習・Mahalanobis 未知検出器・評価図</td></tr>
+<tr><td><code>src/robot.py</code></td><td>数値 IK、軌道補間、吸着グリッパ、pick / place</td></tr>
+<tr><td><code>src/run_task.py</code></td><td>閉ループ仕分けタスクの実行、動画オーバーレイ、結果 JSON</td></tr>
+<tr><td><code>assets/panda.xml</code></td><td>MuJoCo Menagerie の Panda に吸着ツール（サイト）を追加したもの</td></tr>
 </table>
 
-<h2>8. 蜿り・枚迪ｮ繝ｻ菴ｿ逕ｨ繝ｩ繧､繝悶Λ繝ｪ</h2>
+<h2>8. 参考文献・使用ライブラリ</h2>
 <ol class="small">
-  <li>Recycling Product News, "AMP Robotics' first AI-guided robotics system installed in the UK at Recyco" (2021). 80 繝斐ャ繧ｯ/蛻・ｻ･荳奇ｼ井ｺｺ縺ｮ邏・2 蛟搾ｼ峨√ち繝ｳ繝・Β縺ｧ譛螟ｧ 150 繝斐ャ繧ｯ/蛻・・      https://www.recyclingproductnews.com/article/37333/</li>
-  <li>The Robot Report, "AMP Robotics launches Cortex dual-robot system for recycling" (2019). 譛螟ｧ 160 蛟・蛻・・      https://www.therobotreport.com/rbr50-company/amp-robotics-launches-cortex-dual-robot-system-for-recycling/</li>
-  <li>繝九Η繝ｼ繧ｹ繧､繝・メ・域律蛻雁ｷ･讌ｭ譁ｰ閨橸ｼ・ "AI繝ｭ繝懊〒逕｣蟒・∈蛻･縲∽ｽ懈･ｭ蜩｡18莠ｺ竊・莠ｺ縺ｫ" (2017-11-22). https://newswitch.jp/p/11118</li>
+  <li>Recycling Product News, "AMP Robotics' first AI-guided robotics system installed in the UK at Recyco" (2021). 80 ピック/分以上（人の約 2 倍）、タンデムで最大 150 ピック/分。
+      https://www.recyclingproductnews.com/article/37333/</li>
+  <li>The Robot Report, "AMP Robotics launches Cortex dual-robot system for recycling" (2019). 最大 160 個/分。
+      https://www.therobotreport.com/rbr50-company/amp-robotics-launches-cortex-dual-robot-system-for-recycling/</li>
+  <li>ニュースイッチ（日刊工業新聞）, "AIロボで産廃選別、作業員18人→2人に" (2017-11-22). https://newswitch.jp/p/11118</li>
   <li>K. Lee, K. Lee, H. Lee, J. Shin, "A Simple Unified Framework for Detecting Out-of-Distribution Samples and Adversarial Attacks," NeurIPS 2018. https://arxiv.org/abs/1807.03888</li>
-  <li>MuJoCo 3.17 (Apache-2.0) https://mujoco.org ・・MuJoCo Menagerie franka_emika_panda (BSD-3-Clause) https://github.com/google-deepmind/mujoco_menagerie</li>
-  <li>PyTorch 2.x, NumPy, SciPy, Pillow, imageio-ffmpeg, Matplotlib縲よ悽隱ｲ鬘後・繧ｳ繝ｼ繝峨・ MIT 繝ｩ繧､繧ｻ繝ｳ繧ｹ縺ｧ蜈ｬ髢九・/li>
-  <li>隰帛ｺｧ繧ｵ繝ｳ繝励Ν縲訓ick and Place Task - ROS2 Gazebo Simulation (UR3 + Robotiq)縲阪隈emini Robotics-ER 1.6 繧定ｩｦ縺吶阪ｒ蜿り・↓縲√ヤ繝ｼ繝ｫ繧・MuJoCo 縺ｫ縲∬ｪ崎ｭ倥ｒ閾ｪ菴・CNN 縺ｫ鄂ｮ縺肴鋤縺医※讒区・縺励◆縲・/li>
+  <li>MuJoCo 3.17 (Apache-2.0) https://mujoco.org ／ MuJoCo Menagerie franka_emika_panda (BSD-3-Clause) https://github.com/google-deepmind/mujoco_menagerie</li>
+  <li>PyTorch 2.x, NumPy, SciPy, Pillow, imageio-ffmpeg, Matplotlib。本課題のコードは MIT ライセンスで公開。</li>
+  <li>講座サンプル「Pick and Place Task - ROS2 Gazebo Simulation (UR3 + Robotiq)」「Gemini Robotics-ER 1.6 を試す」を参考に、ツールを MuJoCo に、認識を自作 CNN に置き換えて構成した。</li>
 </ol>
-<p class="small">譛ｬ隱ｲ鬘後・螳溯｣・・螳滄ｨ薙・譁・嶌菴懈・縺ｫ縺ｯ逕滓・ AI・・laude・峨ｒ豢ｻ逕ｨ縺励◆縲・/p>
+<p class="small">本課題の実装・実験・文書作成には生成 AI（Claude）を活用した。</p>
 </body>
 </html>
-
