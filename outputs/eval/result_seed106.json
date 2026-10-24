@@ -1,0 +1,319 @@
+{
+ "seed": 106,
+ "n_objects": 13,
+ "n_picked": 13,
+ "n_correct": 12,
+ "n_fail": 0,
+ "sim_time": 84.25799999998503,
+ "wall_time": 9.282192707061768,
+ "in_correct_bin": {
+  "correct": 12,
+  "wrong": 1,
+  "none": 0,
+  "detail": [
+   {
+    "name": "obj0",
+    "cls": "carton",
+    "bin": "carton"
+   },
+   {
+    "name": "obj1",
+    "cls": "can",
+    "bin": "can"
+   },
+   {
+    "name": "obj2",
+    "cls": "glass",
+    "bin": "glass"
+   },
+   {
+    "name": "obj3",
+    "cls": "pet",
+    "bin": "pet"
+   },
+   {
+    "name": "obj4",
+    "cls": "carton",
+    "bin": "unknown"
+   },
+   {
+    "name": "obj5",
+    "cls": "glass",
+    "bin": "glass"
+   },
+   {
+    "name": "obj6",
+    "cls": "pet",
+    "bin": "pet"
+   },
+   {
+    "name": "obj7",
+    "cls": "pet",
+    "bin": "pet"
+   },
+   {
+    "name": "obj8",
+    "cls": "can",
+    "bin": "can"
+   },
+   {
+    "name": "obj9",
+    "cls": "unknown",
+    "bin": "unknown"
+   },
+   {
+    "name": "obj10",
+    "cls": "can",
+    "bin": "can"
+   },
+   {
+    "name": "obj11",
+    "cls": "glass",
+    "bin": "glass"
+   },
+   {
+    "name": "obj12",
+    "cls": "carton",
+    "bin": "carton"
+   }
+  ]
+ },
+ "log": [
+  {
+   "iter": 0,
+   "pred": "can",
+   "prob": 0.9698562622070312,
+   "held": "obj8",
+   "gt": "can",
+   "correct": true,
+   "est_xy": [
+    0.4055233151593824,
+    0.1528223260817008
+   ],
+   "z_top": 0.0655319094657898,
+   "sim_time": 6.417999999999515
+  },
+  {
+   "iter": 1,
+   "pred": "can",
+   "prob": 0.9454848170280457,
+   "held": "obj10",
+   "gt": "can",
+   "correct": true,
+   "est_xy": [
+    0.4071847124001012,
+    -0.15192654083795706
+   ],
+   "z_top": 0.06913119554519653,
+   "sim_time": 12.772000000000935
+  },
+  {
+   "iter": 2,
+   "pred": "carton",
+   "prob": 0.9880356192588806,
+   "held": "obj0",
+   "gt": "carton",
+   "correct": true,
+   "est_xy": [
+    0.43839628998679697,
+    0.03539006935925137
+   ],
+   "z_top": 0.09512758255004883,
+   "sim_time": 19.01400000000034
+  },
+  {
+   "iter": 3,
+   "pred": "unknown",
+   "prob": 0.9807230830192566,
+   "held": "obj4",
+   "gt": "carton",
+   "correct": false,
+   "est_xy": [
+    0.47055645382039313,
+    -0.06583701423110391
+   ],
+   "z_top": 0.08332759141921997,
+   "sim_time": 24.93199999999706
+  },
+  {
+   "iter": 4,
+   "pred": "glass",
+   "prob": 0.964580774307251,
+   "held": "obj2",
+   "gt": "glass",
+   "correct": true,
+   "est_xy": [
+    0.48639466375956153,
+    0.20363635768854466
+   ],
+   "z_top": 0.11073201894760132,
+   "sim_time": 31.33799999999351
+  },
+  {
+   "iter": 5,
+   "pred": "pet",
+   "prob": 0.9853790998458862,
+   "held": "obj6",
+   "gt": "pet",
+   "correct": true,
+   "est_xy": [
+    0.5002929931992041,
+    -0.21964808494132368
+   ],
+   "z_top": 0.10553199052810669,
+   "sim_time": 37.89800000000035
+  },
+  {
+   "iter": 6,
+   "pred": "carton",
+   "prob": 0.946700930595398,
+   "held": "obj12",
+   "gt": "carton",
+   "correct": true,
+   "est_xy": [
+    0.5083055585210573,
+    0.106857825130533
+   ],
+   "z_top": 0.10992759466171265,
+   "sim_time": 44.2380000000081
+  },
+  {
+   "iter": 7,
+   "pred": "can",
+   "prob": 0.9742789268493652,
+   "held": "obj1",
+   "gt": "can",
+   "correct": true,
+   "est_xy": [
+    0.5585563129128708,
+    -0.11148354182128435
+   ],
+   "z_top": 0.06233096122741699,
+   "sim_time": 50.50800000001576
+  },
+  {
+   "iter": 8,
+   "pred": "pet",
+   "prob": 0.9771820902824402,
+   "held": "obj7",
+   "gt": "pet",
+   "correct": true,
+   "est_xy": [
+    0.5729959818636381,
+    -0.009269944559885366
+   ],
+   "z_top": 0.093533456325531,
+   "sim_time": 56.76400000002341
+  },
+  {
+   "iter": 9,
+   "pred": "glass",
+   "prob": 0.9233083128929138,
+   "held": "obj5",
+   "gt": "glass",
+   "correct": true,
+   "est_xy": [
+    0.6106542422330161,
+    0.12734931875340538
+   ],
+   "z_top": 0.1063309907913208,
+   "sim_time": 63.04800000003109
+  },
+  {
+   "iter": 10,
+   "pred": "unknown",
+   "prob": 0.9818799495697021,
+   "held": "obj9",
+   "gt": "unknown",
+   "correct": true,
+   "est_xy": [
+    0.60581808361751,
+    0.22331300898329037
+   ],
+   "z_top": 0.05072754621505737,
+   "sim_time": 68.96000000002068
+  },
+  {
+   "iter": 11,
+   "pred": "pet",
+   "prob": 0.9808699488639832,
+   "held": "obj3",
+   "gt": "pet",
+   "correct": true,
+   "est_xy": [
+    0.6183975612764134,
+    -0.2131868928757499
+   ],
+   "z_top": 0.09593135118484497,
+   "sim_time": 75.48400000000548
+  },
+  {
+   "iter": 12,
+   "pred": "glass",
+   "prob": 0.9652926325798035,
+   "held": "obj11",
+   "gt": "glass",
+   "correct": true,
+   "est_xy": [
+    0.6468754431846773,
+    -0.06400846287351097
+   ],
+   "z_top": 0.11253148317337036,
+   "sim_time": 81.45799999999156
+  }
+ ],
+ "objects": [
+  {
+   "name": "obj0",
+   "cls": "carton"
+  },
+  {
+   "name": "obj1",
+   "cls": "can"
+  },
+  {
+   "name": "obj2",
+   "cls": "glass"
+  },
+  {
+   "name": "obj3",
+   "cls": "pet"
+  },
+  {
+   "name": "obj4",
+   "cls": "carton"
+  },
+  {
+   "name": "obj5",
+   "cls": "glass"
+  },
+  {
+   "name": "obj6",
+   "cls": "pet"
+  },
+  {
+   "name": "obj7",
+   "cls": "pet"
+  },
+  {
+   "name": "obj8",
+   "cls": "can"
+  },
+  {
+   "name": "obj9",
+   "cls": "unknown"
+  },
+  {
+   "name": "obj10",
+   "cls": "can"
+  },
+  {
+   "name": "obj11",
+   "cls": "glass"
+  },
+  {
+   "name": "obj12",
+   "cls": "carton"
+  }
+ ]
+}

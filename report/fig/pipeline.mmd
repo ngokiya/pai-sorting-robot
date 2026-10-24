@@ -1,0 +1,16 @@
+flowchart TB
+    A["① 観測: 俯瞰 RGB-D カメラ (480×480)<br/>RGB 画像 + 高さマップ"]
+    B["② 検出: 高さ閾値で前景抽出 → 連結成分ラベリング<br/>重心(u,v)・上面高さ z_top・56×56×4ch クロップ"]
+    C["③ 位置推定: ピンホール逆投影<br/>(u, v, z_top) → ワールド座標 (x, y)"]
+    D["④ 分類: CNN (PyTorch, 約2.8万パラメータ)<br/>PET / 缶 / 紙パック / ガラス"]
+    E["⑤ 未知物体検出: 特徴空間の Mahalanobis 距離<br/>閾値超過 → 「手選別」ビンへ"]
+    F["⑥ 制御: 減衰最小二乗 IK + 5次補間軌道<br/>Franka Panda 7軸 位置サーボ"]
+    G["⑦ 把持・搬送・投入<br/>吸着グリッパ (weld 拘束) / ビンのスロットへ"]
+    A --> B --> C --> F
+    B --> D --> E --> F
+    F --> G
+    G -.->|閉ループ: 物体が無くなるまで再観測| A
+    classDef ai fill:#dbeafe,stroke:#1d4ed8,color:#111;
+    classDef sim fill:#fef9c3,stroke:#a16207,color:#111;
+    class D,E ai;
+    class A,G sim;

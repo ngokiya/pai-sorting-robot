@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+data/
+outputs/*.mp4
+outputs/test_*
+outputs/*.gif
+outputs/*.log
+assets/scene_generated.xml
+assets/scene_dataset_tmp.xml
+assets/scene_seed*.xml
